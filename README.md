@@ -34,4 +34,26 @@ Go to your save-to-s3 task's API tab and copy the URL for the Run Task endpoint,
 
 Go to either the actor or (more likely) the actor task you want to add save-to-s3 functionality to. In the Webhooks tab, add a webhook with the URL you just copied. For Event types, select ACTOR.RUN.SUCCEEDED. Then Save.
 
-### 3. Er, that's it!
+## Security
+
+Because you store yoour AWS user's key and secret as part of this actor's input, it is _strongly recommended_ that you create an AWS IAM user specifically for Apify, and only grant access to the specific buckey you are using.
+
+An example policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetBucketLocation", "s3:ListAllMyBuckets"],
+      "Resource": "arn:aws:s3:::*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": ["arn:aws:s3:::YOUR-BUCKET", "arn:aws:s3:::YOUR-BUCKET/*"]
+    }
+  ]
+}
+```
