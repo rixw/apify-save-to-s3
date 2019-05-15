@@ -111,6 +111,12 @@ Apify.main(async () => {
     throw new Error(`Unable to upload to S3: ${e.message}`);
   }
 
-  await Apify.setValue('OUTPUT', upload);
+  const result = {
+    bucket: input.bucket,
+    key: key,
+    response: upload,
+  };
+
+  await Apify.setValue('OUTPUT', result);
   log.debug('save-to-s3: done');
 });
