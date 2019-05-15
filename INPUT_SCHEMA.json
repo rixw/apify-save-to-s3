@@ -1,0 +1,65 @@
+{
+  "title": "Save to S3 Input",
+  "type": "object",
+  "description": "Use the following form to configure Save to S3:",
+  "schemaVersion": 1,
+  "properties": {
+    "accessKeyId": {
+      "title": "AWS Key ID",
+      "type": "string",
+      "description": "Enter the access key ID for the AWS user",
+      "editor": "textfield",
+      "prefill": ""
+    },
+    "secretAccessKey": {
+      "title": "AWS Secret Access Key",
+      "type": "string",
+      "description": "Enter the secret access key for the AWS user",
+      "editor": "textfield",
+      "prefill": ""
+    },
+    "region": {
+      "title": "AWS region",
+      "type": "string",
+      "description": "Enter the AWS region your S3 bucket is located in",
+      "editor": "textfield",
+      "prefill": ""
+    },
+    "bucket": {
+      "title": "AWS bucket",
+      "type": "string",
+      "description": "Enter the name of the S3 bucket to use",
+      "editor": "textfield",
+      "prefill": ""
+    },
+    "format": {
+      "title": "Data format",
+      "type": "string",
+      "description": "The data format to download the dataset in",
+      "default": "json",
+      "editor": "select",
+      "enum": ["json", "jsonl", "xml", "html", "csv", "xslx", "rss"]
+    },
+    "clean": {
+      "title": "Clean items only",
+      "type": "boolean",
+      "description": "Crawler will ignore SSL certificate errors.",
+      "default": false
+    },
+    "datasetOptions": {
+      "title": "Dataset options",
+      "type": "object",
+      "description": "An object whose properties will be enumerated and added to the dataset get items API request. See https://apify.com/docs/api/v2#/reference/datasets/item-collection/get-items.",
+      "default": {
+        "offset": 0
+      },
+      "editor": "json"
+    },
+    "debugLog": {
+      "title": "Debug log",
+      "type": "boolean",
+      "description": "Debug messages will be included in the log. Use <code>context.log.debug('message')</code> to log your own debug messages.",
+      "default": false
+    }
+  }
+}

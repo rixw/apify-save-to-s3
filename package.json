@@ -1,0 +1,34 @@
+{
+  "name": "save-to-s3",
+  "version": "0.1.0",
+  "description": "Saves a dataset to Amazon S3.",
+  "main": "main.js",
+  "dependencies": {
+    "apify": "^0.13.3",
+    "aws-sdk": "2.455.0",
+    "axios": "0.18.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "10.0.1",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "4.2.0",
+    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-react": "7.13.0",
+    "prettier": "1.17.1"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rixw/actor-scraper"
+  },
+  "author": "Richard Weaver",
+  "license": "ISC",
+  "homepage": "https://github.com/rixw/actor-scraper"
+}

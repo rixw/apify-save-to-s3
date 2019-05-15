@@ -1,0 +1,7 @@
+{
+  "name": "save-to-s3",
+  "version": "0.1",
+  "buildTag": "latest",
+  "env": null,
+  "template": "basic"
+}
