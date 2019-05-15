@@ -32,6 +32,14 @@
       "editor": "textfield",
       "prefill": ""
     },
+    "objectKeyFormat": {
+      "title": "Object key format",
+      "type": "string",
+      "description": "The key to use for the filename",
+      "editor": "textfield",
+      "prefill": "${data.actorTaskId}_${data.startedAt}.${format}",
+      "default": "${data.actorTaskId}_${data.startedAt}.${format}"
+    },
     "format": {
       "title": "Data format",
       "type": "string",
@@ -50,9 +58,8 @@
       "title": "Dataset options",
       "type": "object",
       "description": "An object whose properties will be enumerated and added to the dataset get items API request. See https://apify.com/docs/api/v2#/reference/datasets/item-collection/get-items.",
-      "default": {
-        "offset": 0
-      },
+      "default": {},
+      "prefill": {},
       "editor": "json"
     },
     "debugLog": {

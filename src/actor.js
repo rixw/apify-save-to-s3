@@ -6,6 +6,39 @@ const {
   utils: { log },
 } = Apify;
 
+function getProperty(propertyName, object) {
+  const parts = propertyName.split('.');
+  const { length } = parts;
+  let property = object || this;
+  for (let i = 0; i < length; i += 1) {
+    property = property[parts[i]];
+  }
+
+  return property;
+}
+
+function formatKey(input) {
+  log.debug(`save-to-s3: parsing format string: ${input.keyFormat}`);
+  let result =
+    // eslint-disable-next-line no-template-curly-in-string
+    input.keyFormat || '${data.actorTaskId}_${data.startedAt}.${format}';
+  const replaceMatches = result.match(/\$\{[^$]*\}/g);
+  if (replaceMatches) {
+    log.debug(`save-to-s3: found ${replaceMatches.length} replacement tags`);
+    for (let i = 0; i < replaceMatches.length; i += 1) {
+      log.debug(`save-to-s3: replacing tag ${replaceMatches[i]}`);
+      const tag = replaceMatches[i];
+      if (!tag || tag.length < 3) break; // Fail silently
+      const inputProp = tag.substr(2, tag.length - 3);
+      log.debug(`save-to-s3: getting property ${inputProp}`);
+      const value = getProperty(inputProp, input);
+      log.debug(`save-to-s3: got property value ${value}`);
+      result = result.replace(tag, value);
+    }
+  }
+  return result;
+}
+
 Apify.main(async () => {
   log.debug('save-to-s3: reading INPUT.');
   const input = await Apify.getInput();
@@ -56,10 +89,8 @@ Apify.main(async () => {
   log.debug(`save-to-s3: ${fileContents.length}`);
 
   // Save to S3
-  const objectKey = `${
-    input.data.defaultDatasetId
-  }_${input.data.startedAt.replace('.', '%2E')}.${input.format}`;
-  log.debug(`save-to-s3: object key ${objectKey}`);
+  const key = formatKey(input);
+  log.debug(`save-to-s3: object key ${key}`);
   const s3 = new S3({
     apiVersion: '2006-03-01',
     accessKeyId: input.accessKeyId,
@@ -68,7 +99,7 @@ Apify.main(async () => {
   });
   const uploadParams = {
     Bucket: input.bucket,
-    Key: objectKey,
+    Key: key,
     Body: fileContents,
     ContentEncoding: response.ContentEncoding,
   };
