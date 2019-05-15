@@ -21,7 +21,7 @@ function formatKey(input) {
   log.debug(`save-to-s3: parsing format string: ${input.keyFormat}`);
   let result =
     // eslint-disable-next-line no-template-curly-in-string
-    input.keyFormat || '${data.actorTaskId}_${data.startedAt}.${format}';
+    input.keyFormat || '${resource.id}_${resource.startedAt}.${format}';
   const replaceMatches = result.match(/\$\{[^$]*\}/g);
   if (replaceMatches) {
     log.debug(`save-to-s3: found ${replaceMatches.length} replacement tags`);
@@ -47,7 +47,7 @@ Apify.main(async () => {
 
   // Build the APIFY API Url for the dataset
   const stem = `https://api.apify.com/v2/datasets/${
-    input.data.defaultDatasetId
+    input.resource.defaultDatasetId
   }/items`;
   const url = new URL(stem);
   const params = new URLSearchParams(input.datasetOptions);

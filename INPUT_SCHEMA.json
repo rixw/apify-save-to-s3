@@ -37,8 +37,8 @@
       "type": "string",
       "description": "The key to use for the filename",
       "editor": "textfield",
-      "prefill": "${data.actorTaskId}_${data.startedAt}.${format}",
-      "default": "${data.actorTaskId}_${data.startedAt}.${format}"
+      "prefill": "${resource.id}_${resource.startedAt}.${format}",
+      "default": "${resource.id}_${resource.startedAt}.${format}"
     },
     "format": {
       "title": "Data format",
