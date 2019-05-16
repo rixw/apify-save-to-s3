@@ -18,7 +18,7 @@ function getProperty(propertyName, object) {
 }
 
 function formatKey(input) {
-  log.debug(`save-to-s3: parsing format string: ${input.keyFormat}`);
+  log.debug(`save-to-s3: parsing format string: ${input.objectKeyFormat}`);
   let result =
     // eslint-disable-next-line no-template-curly-in-string
     input.keyFormat || '${resource.id}_${resource.startedAt}.${format}';
