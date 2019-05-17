@@ -18,10 +18,10 @@ function getProperty(propertyName, object) {
 }
 
 function formatKey(input) {
-  log.debug(`save-to-s3: parsing format string: ${input.keyFormat}`);
+  log.debug(`save-to-s3: parsing format string: ${input.objectKeyFormat}`);
   let result =
     // eslint-disable-next-line no-template-curly-in-string
-    input.keyFormat || '${resource.id}_${resource.startedAt}.${format}';
+    input.objectKeyFormat || '${resource.id}_${resource.startedAt}.${format}';
   const replaceMatches = result.match(/\$\{[^$]*\}/g);
   if (replaceMatches) {
     log.debug(`save-to-s3: found ${replaceMatches.length} replacement tags`);
