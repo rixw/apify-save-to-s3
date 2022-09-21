@@ -4,7 +4,7 @@ An [Apify](https://apify.com) actor to save the default dataset of a run to an S
 
 It is designed to be called from the ACTOR.RUN.SUCCEEDED webhook of the actor that has generated the dataset.
 
-This actor is compatible with API v2 - I made it because I couldn't get the [Crawler Results To S3](https://apify.com/apify/crawler-results-to-s3) actor to work with v2 actors.
+This actor is compatible with API v2.
 
 ## Usage
 
